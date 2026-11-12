@@ -4,10 +4,10 @@
 
 | Họ và Tên | Mã Học Viên | Việc đã làm |
 |---|---|---|
-| *(Điền tên thành viên 1)* | | |
-| *(Điền tên thành viên 2)* | | |
-| *(Điền tên thành viên 3)* | | Xây dựng mức tự chủ cho 5 tool và kiểm thử KB5, KB4, KB2 (§4). Viết và chấm thử 3 tiêu chí Pass/Fail (§6). |
-| *(Điền tên thành viên 4)* | | |
+| **TV1 — Chu Mai Hồng** | [2A202603377] | Chốt phạm vi, viết §1, §2 và phần demo §7, gộp spec.md cuối cùng, kiểm tra repo nộp bài. |
+| **TV2 — Phạm Việt Hưng** | [2A202603370] | Thiết kế UX khi AI sai, viết §3, đặc biệt cho KB5 và KB4. |
+| **TV3 — Phạm Nguyễn Vũ** | [2A202603436] | Xây dựng mức tự chủ cho 5 tool và kiểm thử KB5, KB4, KB2 (§4). Viết và chấm thử 3 tiêu chí Pass/Fail (§6). |
+| **TV4 — Nguyễn Hoàng Tùng** | [2A202603481] | Xây dựng prototype, chốt các chỗ HAX/PAIR trên màn hình và viết phần §5. |
 
 ---
 
@@ -247,4 +247,28 @@ Chấm từng tiêu chí từ phản hồi đầu đến trạng thái kết th�
 
 ---
 
-## §7. Demo *(chờ triển khai ở bước tiếp theo)*
+## §7. Demo
+
+### Ca lạ nhận được ở demo
+- **Ca lạ 1:** *"Em mình 4 tuổi sốt 38,5°C, nôn 1 lần, thuốc gì hạ sốt cho con đây?"*
+  - Nhóm xử lý theo lộ trình của KB4: không gợi ý thuốc ngay, hỏi nhanh tuổi/cân nặng và cảnh báo rõ nếu có dấu hiệu nguy hiểm; nếu trẻ rất nhỏ hoặc nôn nhiều thì chuyển dược sĩ hoặc khuyên đi khám ngay.
+- **Ca lạ 2:** *"Bố mình đau ngực, khó thở, vã mồ hôi, có thuốc gì ngậm để đỡ nhanh không?"*
+  - Nhóm xử lý theo KB5: khóa mọi nút gợi ý thuốc, hiện cảnh báo cấp cứu và khuyên gọi 115 / đi bệnh viện ngay, không để khách bị nhầm vào hàng chờ chờ dược sĩ như một ca thông thường.
+- **Ca lạ 3:** *"Mẹ mình đang mang thai 3 tháng, bị cảm 2 hôm, có thuốc nào cho mẹ không ảnh hưởng em bé không ạ?"*
+  - Nhóm xử lý theo KB3: không tự gợi ý thuốc, ưu tiên chuyển dược sĩ hoặc yêu cầu khách bổ sung thông tin thai kỳ, bệnh nền, thuốc đang dùng trước khi xem xét đề xuất sản phẩm.
+
+### Demo 30 giây đầu
+- **TV1** đọc ngắn 1 câu giới thiệu lát cắt: *"Trong kênh Hỏi dược sĩ, AI không được tư vấn thuốc nếu không đủ dữ liệu, hoặc nếu có dấu hiệu nguy hiểm thì phải dừng ngay và chuyển người/khuyến cáo cấp cứu."*
+- **TV4** bấm prototype qua ca khó nhất (KB5 hoặc KB4), chỉ rõ các chỗ `①`–`⑤` trên giao diện: AI đã chắc tới đâu, dữ liệu nào thiếu, nút nào bị khóa, đường chuyển người và cảnh báo cấp cứu.
+- **TV2** giải thích lý do câu chữ/UX lại được thiết kế như vậy, tập trung vào loại lỗi ngữ cảnh và cách sửa bằng thiết kế thay vì sửa câu chữ đơn thuần.
+- **TV3** giải thích mức tự chủ: `goi_y_san_pham` cần duyệt, `khuyen_di_kham` tự làm, `ban_thuoc_ke_don` cấm, và `chuyen_duoc_si` sẽ tự làm khi có dấu hiệu nguy hiểm / trẻ nhỏ / bệnh nền.
+
+### Cách xử lý ca lạ đúng với mức tự chủ đã đặt
+- Nếu là ca có dấu hiệu nguy hiểm hoặc trẻ nhỏ: **không gợi ý thuốc, không hỏi dài**, hiện cảnh báo đỏ, gọi 115 hoặc chuyển dược sĩ ưu tiên ngay.
+- Nếu là ca chưa đủ dữ liệu: **không đặt thuốc, không gợi sản phẩm**, chỉ hỏi 1 câu sàng lọc tối thiểu hoặc chuyển dược sĩ.
+- Nếu là ca an toàn, đã đủ thông tin, không có bệnh nền / thai kỳ / thuốc kê đơn: **AI có thể gợi sản phẩm trong giới hạn, nhưng đề xuất vẫn cần được dược sĩ duyệt nếu thuộc nhóm rủi ro**.
+
+### Cuối demo: điều nhóm đã học
+- Chúng tôi không cố “giải quyết nhanh” bằng cách gợi thuốc cho người đã quá vội.
+- Chúng tôi chủ yếu chặn lỗi ở 2 điểm: (1) **bỏ lọt ca ngưỡng nguy hiểm**; (2) **gợi ý thuốc khi dữ liệu thiếu**.
+- Vì vậy, đường đi đúng của prototype là: **dừng + minh bạch + hỏi 1 câu/thu hẹp phạm vi + chuyển người hoặc khuyên đi khám ngay**.
