@@ -2,15 +2,15 @@
 
 ### 5.1 Sản phẩm
 
-- **File:** `prototype/index.html` — mở trực tiếp bằng trình duyệt, không cần server.
+- **File:** `prototype/index.html` — một trang HTML duy nhất, mở trực tiếp bằng trình duyệt, không cần server. Trên trang có hai nút chuyển giữa luồng KB4 và KB5; khung chat mô phỏng nằm bên trái, còn dữ liệu chuyển giao, bảng mức tự chủ và chú thích HAX/PAIR nằm bên phải.
 - **Công cụ:** HTML/CSS/JavaScript thuần; giao diện responsive, chủ đề xanh lá nhạt.
-- **Phần mock:** cuộc gọi 115, chuyển ticket cho dược sĩ và trạng thái hàng đợi đều là mô phỏng giao diện; không có backend, không gửi dữ liệu thật.
+- **Phần mock:** cuộc gọi 115, chuyển ticket cho dược sĩ, trạng thái nhận ca và timeout đều là mô phỏng giao diện; không có backend, không gửi dữ liệu thật. Trong sản phẩm mục tiêu ở §3–§4, im lặng 30 giây (KB5) hoặc 90 giây (KB4) sẽ tự kích hoạt chuyển ca. Trong prototype, người demo chủ động bấm nút **“Mô phỏng im lặng 30/90 giây”** để đi tới trạng thái tương ứng; prototype không chạy bộ đếm thời gian thật.
 - **Lời gọi AI thật:** Không. Prototype dùng các nhánh quyết định cố định từ KB4 và KB5, phù hợp yêu cầu bài thiết kế và tránh đưa dữ liệu sức khỏe vào dịch vụ bên ngoài.
 
 ### 5.2 Luồng bấm được
 
-1. **KB4 — Trẻ sốt 39°C kèm nôn:** khách chọn nhanh tuổi, cân nặng và dấu hiệu cảnh báo. Nếu chọn `Dưới 3 tháng` hoặc dấu hiệu đỏ, prototype chuyển sang `khuyen_di_kham`; nếu chưa có dấu hiệu đỏ, ca được chuyển dược sĩ ưu tiên và AI không tự đưa liều hay bán thuốc. Người dùng có thể sửa/nhập lại toàn bộ thông tin. Có nút mô phỏng 90 giây im lặng, trạng thái đang chờ nhận ca, trạng thái dược sĩ đã nhận và trạng thái quá hạn “Chưa có dược sĩ nhận ca” kèm đường đi khám; giao diện không bịa thời gian chờ khi hệ thống chưa có dữ liệu.
-2. **KB5 — Đau ngực, khó thở, vã mồ hôi:** prototype chặn hoàn toàn gợi ý sản phẩm, thay bằng nút `Gọi 115 ngay` và `Kết nối khẩn với dược sĩ`. Ca không đi qua hàng đợi thường. Có nút mô phỏng 30 giây im lặng để tự gửi tóm tắt P0, và nhánh mô phỏng gửi tóm tắt thất bại; trong nhánh lỗi, nút gọi 115 vẫn khả dụng và tách biệt với trạng thái chuyển ca.
+1. **KB4 — Trẻ sốt 39°C kèm nôn:** trên cùng trang, người demo chọn nút KB4; khách chọn nhanh tuổi, cân nặng và dấu hiệu cảnh báo. Nếu chọn `Dưới 3 tháng` hoặc dấu hiệu đỏ, prototype chuyển sang `khuyen_di_kham`; nếu chưa có dấu hiệu đỏ, ca được chuyển dược sĩ ưu tiên và AI không tự đưa liều hay bán thuốc. Người dùng có thể sửa/nhập lại toàn bộ thông tin. Có nút mô phỏng 90 giây im lặng, trạng thái đang chờ nhận ca, trạng thái dược sĩ đã nhận và trạng thái quá hạn “Chưa có dược sĩ nhận ca” kèm đường đi khám; giao diện không bịa thời gian chờ khi hệ thống chưa có dữ liệu.
+2. **KB5 — Đau ngực, khó thở, vã mồ hôi:** trên cùng trang, người demo chuyển sang nút KB5. Prototype chặn hoàn toàn gợi ý sản phẩm, thay bằng nút `Gọi 115 ngay` và `Kết nối khẩn với dược sĩ`. Ca không đi qua hàng đợi thường. Có nút mô phỏng 30 giây im lặng để đi tới trạng thái gửi tóm tắt P0, và nhánh mô phỏng gửi tóm tắt thất bại; trong nhánh lỗi, nút gọi 115 vẫn khả dụng và tách biệt với trạng thái chuyển ca.
 
 ### 5.3 Ánh xạ vị trí đánh số với HAX/PAIR và mức tự chủ
 
